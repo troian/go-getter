@@ -39,7 +39,7 @@ func (cpb *ProgressBar) TrackProgress(src string, currentSize, totalSize int64, 
 
 	// newPb.Set(pb.SIBytesPrefix, true)
 	newPb.Set(pb.Bytes, true)
-	newPb.SetTemplateString(fmt.Sprintf(`%s {{ bar . "|" "-" (cycle . "↖" "↗" "↘" "↙" ) "." ">"}} {{percent . }} {{speed . "%%s/s" "? MiB/s"}}`, filepath.Base(src)))
+	newPb.SetTemplateString(fmt.Sprintf(`%s {{ bar . "|" "=" (move . "=") "." ">"}} {{percent . }} {{speed . "%%s/s" "? MiB/s"}}`, filepath.Base(src)))
 
 	if cpb.pool == nil {
 		cpb.pool = pb.NewPool()

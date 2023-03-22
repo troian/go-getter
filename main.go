@@ -173,6 +173,9 @@ func main() {
 			}
 
 			res, err := client.Get(ctx, req)
+			if err != nil {
+				return err
+			}
 
 			log.Printf("-> %s", res.Dst)
 

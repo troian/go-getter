@@ -1,0 +1,58 @@
+project_name: go-getter
+env:
+  - GO111MODULE=on
+builds:
+  - id: go-getter
+    binary: go-getter
+    main: ./
+    goarch:
+      - arm64
+      - amd64
+    goos:
+      - darwin
+      - linux
+universal_binaries:
+  - id: darwin-universal
+    ids:
+      - go-getter
+    replace: true
+    name_template: "go-getter"
+archives:
+  - id: go-getter
+    builds:
+      - darwin-universal
+      - go-getter
+    name_template: "go-getter_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    wrap_in_directory: false
+    rlcp: true
+    files:
+      - none*
+checksum:
+  name_template: "go-getter_{{ .Version }}_checksums.txt"
+
+nfpms:
+  - id: w/version
+    vendor: "Artur Troian"
+    homepage: "https://github.com/troian/go-getter"
+    maintainer: "Artur Troian <hello@troian.io>"
+    file_name_template: "go-getter_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    formats:
+      - deb
+      - rpm
+    license: Apache 2.0
+  - id: wo/version
+    vendor: "Artur Troian"
+    homepage: "https://github.com/troian/go-getter"
+    maintainer: "Artur Troian <hello@troian.io>"
+    file_name_template: "go-getter_{{ .Os }}_{{ .Arch }}"
+    formats:
+      - deb
+      - rpm
+    license: Apache 2.0
+release:
+  github:
+    owner: troian
+    name: go-getter
+  prerelease: auto
+  mode: replace
+  draft: false

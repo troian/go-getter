@@ -35,7 +35,6 @@ func (cpb *ProgressBar) TrackProgress(src string, currentSize, totalSize int64, 
 	cpb.lock.Lock()
 	defer cpb.lock.Unlock()
 
-	fmt.Printf("currentSize: %d\n", currentSize)
 	newPb := pb.New64(totalSize)
 
 	// newPb.Set(pb.SIBytesPrefix, true)
